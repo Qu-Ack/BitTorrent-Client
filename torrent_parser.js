@@ -8,7 +8,8 @@ module.exports.info_hash = function () {
     const torrent = bencode.decode(fs.readFileSync('test.torrent'));
     let str = bencode.encode(torrent.info)
     const hash = crypt.createHash('sha1').update(str).digest()
-    return hash
+    const urlEncodedHash = encodeURIComponent(hash);
+    return Buffer.from(urlEncodedHash)
 }()
 
 
